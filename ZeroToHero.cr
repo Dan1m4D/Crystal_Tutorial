@@ -163,4 +163,202 @@ message = "Hello World!"
 p! message[6, message.size - 6 - 1]
 
 
+## Control Flow
+
+# Nil
+
+p! "Crystal is awesome".index("aw"),
+  "Crystal is awesome".index("xxxx")
+
+# Bool
+
+p! true, false
+
+
+a = true
+b = false
+
+p! a && b, # conjunction (AND)
+  a || b,  # disjunction (OR)
+  !a,      # negation (NOT)
+  a != b,  # inequivalence (XOR)
+  a == b   # equivalence
+
+
+a = "foo"
+b = nil
+
+p! a && b, # conjunction (AND)
+  a || b,  # disjunction (OR)
+  !a,      # negation (NOT)
+  a != b,  # inequivalence (XOR)
+  a == b   # equivalence
+
+
+# Conditionals 
+
+message = "Hello World"
+
+if message.starts_with?("Hello")
+  puts "Hello to you, too!"
+end
+
+
+
+if message.starts_with?("Hello") || message.starts_with?("Hi")
+  puts "Hey there!"
+end
+
+
+
+str = "Crystal is awesome"
+index = str.index("aw")
+
+if !index.nil?
+  puts str
+  puts "#{" " * index}^^"
+end
+
+
+
+message = "Hello Crystal"
+
+if message.starts_with?("Hello")
+  puts "Hello to you, too!"
+elsif message.includes?("Crystal")
+  puts "Shine bright like a crystal."
+end
+
+if message.includes?("Crystal")
+  puts "Shine bright like a crystal."
+elsif message.starts_with?("Hello")
+  puts "Hello to you, too!"
+end
+
+
+
+# Loop
+
+counter = 0
+
+while counter < 10
+  counter += 1
+
+  puts "Counter: #{counter}"
+end
+
+
+counter = 0
+
+until counter >= 10
+  counter += 1
+
+  puts "Counter: #{counter}"
+end
+
+
+while true
+  puts "Counter: #{counter}"
+end
+
+
+while true
+  puts "Hi, what's your name? (hit Enter when done)"
+
+  # `gets` returns input from the console
+  name = gets
+
+  puts "Nice to meet you, #{name}."
+  puts "Now, let's repeat."
+end
+
+
+counter = 0
+
+while counter < 10
+  counter += 1
+
+  if counter % 3 == 0
+    next
+  end
+
+  puts "Counter: #{counter}"
+end
+
+
+counter = 0
+
+while true
+  counter += 1
+
+  puts "Counter: #{counter}"
+
+  if counter >= 10
+    break
+  end
+end
+
+puts "done"
+
+
+## Methods
+
+def say_hello(recipient)
+  puts "Hello #{recipient}!"
+end
+
+say_hello "World"
+say_hello "Crystal"
+
+
+def say_hello(recipient = "World")
+  puts "Hello #{recipient}!"
+end
+
+say_hello
+say_hello "Crystal"
+
+
+# Type restrictions
+
+def say_hello(recipient : String)
+  puts "Hello #{recipient}!"
+end
+
+say_hello "World"
+say_hello "Crystal"
+
+
+# Overloading
+
+# This methods greets *recipient*.
+def say_hello(recipient : String)
+  puts "Hello #{recipient}!"
+end
+
+# This method greets *times* times.
+def say_hello(times : Int32)
+  puts "Hello " * times
+end
+
+say_hello "World"
+say_hello 3
+
+# Returning value
+
+def adds_2(n : Int32)
+  n + 2
+end
+
+puts adds_2 40
+
+
+def build_even_number(n : Int32)
+  return n if n.even?
+
+  n * 2
+end
+
+puts build_even_number 7
+puts build_even_number 28
 
