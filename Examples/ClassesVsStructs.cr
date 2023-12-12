@@ -29,6 +29,8 @@ struct Student
  end
 end
 
+puts "Test : 1000 instances  "
+
 Benchmark.ips do |x|
  x.report("class") { Array.new(1000) { Person.new("Alice", 25) } }
  x.report("struct") { Array.new(1000) { Student.new("Bob", 20, 90) } }
@@ -37,6 +39,8 @@ end
 p = Person.new("Dani", 20)
 
 s = Student.new("Branches", 20,18)
+
+puts "Test : Method acessibility"
 
 Benchmark.ips do |x|
  x.report("class") { p.greet() }
